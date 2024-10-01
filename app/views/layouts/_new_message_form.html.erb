@@ -1,4 +1,6 @@
-<%= form_with(model: [@single_room, @message], remote: true, class: "w-full") do |form| %>
-<%= form.text_field :body %>
-<%= form.submit data: {disable_with: false}, class: "w-fit" %>
+<%= form_with(model: [@single_room, @message], remote: true, class: "w-full flex justify-between items-center gap-4") do |form| %>
+<%= form.text_area :body, placeholder: "Type message...", class: "block p-2.5 w-full text-sm text-neutral-200 bg-transparent rounded-lg border border-neutral-800 focus:ring-neutral-500 focus:border-neutral-500 dark:bg-gray-700 dark:border-gray-600 resize-none" %>
+<div>
+  <%= form.submit "Send", data: {disable_with: false}, class: "w-fit bg-blue-600 py-2 px-5 rounded-lg" %>
+</div>
 <% end %>

@@ -1,9 +1,12 @@
 
-<h1 class="my-10">Rooms#index</h1>
-<div class="container">
-  <div class="w-full flex flex-nowrap justify-between gap-4">
-    <div class="w-4/12">
-      <h4 class=""><%= current_user.email%></h4>
+<h1 class="mb-2">Rooms#index</h1>
+<h4 class="mb-2">Current user <%= current_user.email%></h4>
+<!--begin chat wrap-->
+<div class="w-[calc(100vw*2)] sm:w-full sm:h-[calc(100vh-64px)] flex flex-nowrap justify-between relative sm:overflow-hidden transition-transform mt-4 sm:mt-0">
+  <!--begin sidebar-->
+  <div class="w-screen sm:w-[300px] lg:w-[355px] h-full sm:absolute sm:top-0 sm:left-0 border-r border-base-300/60 z-20 ">
+    <div class="overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch h-full">
+            
  
         <h5>Users</h5>
         <%= turbo_stream_from "users" %>
@@ -19,18 +22,37 @@
 
         <%= render "layouts/new_room_form"%>
     </div>
-    <div class="w-8/12">     
+  </div>
+  <!--end sidebar-->
+
+  <!--begin chat body-->
+  <div class="w-screen sm:w-full p-0 sm:pl-[300px] lg:pl-[355px] sm:absolute sm:top-0 sm:right-0 z-10">
+    <div class="">
       <% if @single_room %>
-        <div id="single_room">
-          <h4><%= @user&.email || @single_room.name %></h4>
+        <div id="single_room" class=" relative">
+          <div class="px-10 py-4 border-b border-neutral-600">
+            <div class="flex gap-4 items-center">
+              <div class="w-12 h-12 relative overflow-hidden rounded-full border border-neutral-600">
+                <img src="https://img.freepik.com/free-photo/observation-urban-building-business-steel_1127-2397.jpg?t=st=1727782093~exp=1727785693~hmac=8556e726b11f2cc5b62a1813d43f6f0cfa02c49a450ebd226d9128dd2ae8d3da&w=1060" alt="" class="absolute w-full h-full object-fit top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%]">
+              </div>
+              <div>
+              <h4 class="text-lg"><%= @user&.email || @single_room.name %></h4>
+              <div class="text-sm"><%= pluralize(@single_room.unique_users_count, 'user') %></div>
+              </div>
+            </div>
+          </div>
           <%= turbo_stream_from @single_room %>
-          <div id="messages">
+          <div id="messages" class="bg-neutral-700 flex flex-col px-10 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch border border-neutral-600 h-[calc(100vh-236px)]">
             <%= render @messages %>
           </div>
-          <%= render "layouts/new_message_form" %>
+          <div class="w-full px-10 py-4">
+            <%= render "layouts/new_message_form" %>
+          </div>
         </div>
       <% end %>
     </div>
   </div>
+  <!--end chat body-->
 </div>
+<!--end chat wrap-->
 

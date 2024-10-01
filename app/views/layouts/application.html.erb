@@ -9,14 +9,28 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <style>
-      <%= ".message-#{current_user&.id}" %> {
-        background-color: red;
+      <%= ".message-container-#{current_user&.id}" %> {
+        align-self: flex-end;
       }
+
+      <%= ".message-#{current_user&.id}" %> {
+        background-color: #3b82f6;
+        border-radius: 14px 14px 0 14px;
+      }
+
+      <%= ".message-box-#{current_user&.id}" %> > div:first-child {
+       order: 2;
+      }
+
+      <%= ".message-box-#{current_user&.id}" %> > div:first-last-child {
+        order: 1;
+      }
+
+       
     </style>
   </head>
 
   <body>
-    <h1 class="text-xl">Some text 123</h1>
     <%= yield %>
   </body>
 </html>
