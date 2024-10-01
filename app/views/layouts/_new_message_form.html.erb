@@ -1,0 +1,4 @@
+<%= form_with(model: [@single_room, @message], remote: true, class: "w-full") do |form| %>
+<%= form.text_field :body %>
+<%= form.submit data: {disable_with: false}, class: "w-fit" %>
+<% end %>

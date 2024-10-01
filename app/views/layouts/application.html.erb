@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <style>
+      <%= ".message-#{current_user&.id}" %> {
+        background-color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="text-xl">Some text 123</h1>
+    <%= yield %>
+  </body>
+</html>
